@@ -22,20 +22,22 @@ RUN yum -y install rpm dnf-plugins-core \
       epel-release \
       initscripts \
       sudo \
+      cronie \
+      diffutils \
       which \
       hostname \
       libyaml-devel \
-      python3 \
-      python3-pip \
-      python3-pyyaml \
+      python3.12 \
+      python3.12-pip \
+      python3.12-pyyaml \
       iproute \
  && yum clean all
 
 # Upgrade pip to latest version.
-RUN pip3 install --upgrade pip
+RUN pip3.12 install --upgrade pip
 
 # Install Ansible via Pip.
-RUN pip3 install $pip_packages
+RUN pip3.12 install $pip_packages
 
 # Disable requiretty.
 RUN sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers
